@@ -1,16 +1,16 @@
-complete <- function(directory, id = 1:332) {
-        list_files <- list.files(directory, full.names = TRUE)
-        com <- data.frame()
-        comn <- matrix( , 2)
-        comn <- c("id", "nobs")
-        for (i in id) {
-                com <- read.csv(list_files[i])
-                com_subset <- com[which(com[ , "ID"] %in% id), ]
-                x <- sum(complete.cases(com_subset))
-                y <- c(i, x)
-                comn <- rbind(comn, y)
+complete <- function(directory, id = 1:332) { # creates function
+        list_files <- list.files(directory, full.names = TRUE) # generates list
+        com <- data.frame() # generates data frame
+        comn <- matrix( , 2) # generates 2 column matrix
+        comn <- c("id", "nobs") #creates column headings for matrix
+        for (i in id) { # generic funtcion to read the data into the matrix
+                com <- read.csv(list_files[i]) # loads data into the data frame
+                com_subset <- com[which(com[ , "ID"] %in% id), ] #subsets the data frame per the entered criteria
+                x <- sum(complete.cases(com_subset)) # creates variable x to contain sum of selected columns
+                y <- c(i, x)  #creates y vector to select rows
+                comn <- rbind(comn, y) # combines rows into the matrix comn
         }
        
-        print(comn)
+        print(comn) # prints results
 }
 
