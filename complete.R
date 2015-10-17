@@ -1,7 +1,7 @@
 complete <- function(directory, id = 1:332) { # creates function
         list_files <- list.files(directory, full.names = TRUE) # generates list
         com <- data.frame() # generates data frame
-        comn <- matrix( , 2) # generates 2 column matrix
+        comn <- data.frame(id = character(0), nob = character(0))
         comn <- c("id", "nobs") #creates column headings for matrix
         for (i in id) { # generic funtcion to read the data into the matrix
                 com <- read.csv(list_files[i]) # loads data into the data frame
@@ -13,4 +13,3 @@ complete <- function(directory, id = 1:332) { # creates function
        
         print(comn) # prints results
 }
-
