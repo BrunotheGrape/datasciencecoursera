@@ -16,9 +16,8 @@ corr <- function(directory, threshold = 0, id = 1:332) { #creates function
                 }
                 
         }
-
-        y <- head(cr) #these lines manage output
-        print(y)
+        print(head(cr), digits = 4) #these lines manage output
+        #print(y)
         summary(cr, digits = 3)
        
 }
