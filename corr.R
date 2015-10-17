@@ -1,7 +1,7 @@
 
         
 
-corr <- function(directory, threshold, id = 1:332) { #creates function
+corr <- function(directory, threshold = 0, id = 1:332) { #creates function
         list_files <- list.files(directory, full.names = TRUE) #creates data frame to recieve variables
         pol <- data.frame()# At this point I create all the data frames I will need going forward
         rslt <- data.frame()
