@@ -1,8 +1,8 @@
 
 
-rankhospital <- function(state, outcome) { #create function
+rankhospital <- function(state, outcome, num = "best") { #create function
         
-d1 <- as.vector(c(state, outcome)) # creates vector data from inputs
+d1 <- as.vector(c(state, outcome, num)) # creates vector data from inputs
 
         
 r <- data.frame() #establish dataframes for future use
@@ -53,10 +53,11 @@ rslt <- rc[,4:6]
         
         bhosp  <- bstate[order (bstate[d1[2]], bstate$"Hospital.Name"),] # orders the outcome
         
-        rk <- ave(bhosp[d1[2]], FUN=rank)
-        bhosp <- cbind(bhosp, rk)
+        
+        bhosp$rank <- 1:nrow(bhosp)
+        rtn <- subset(bhosp, rank == d1[3])
         #rt <- bhosp[1,2]
-        return(bhosp)
+        return(rtn)
         #return(rt)
                           
 
