@@ -45,20 +45,28 @@ rslt <- rc[,4:6]
         if(t == "FALSE") {stop("invalid state")}
         t <- d1[2] %in% rcn
         if(t == "FALSE") {stop("invalid outcome")}
+        if ((num > nrow(bhosp)) & (!(num == "worst")) & (!(num == "best"))) {stop("NA")}
+        
+        if (num == "best") {d1[3] <- 1} 
+        if (num == "worst") {d1[3] <- nrow(bhosp)}
+        
         
 
         # at this point, having groomed my data, I will code the sort
         bstate <- rc[grep(d1[1], rc$State),] # selects the state
         
         
-        bhosp  <- bstate[order (bstate[d1[2]], bstate$"Hospital.Name"),] # orders the outcome
+        bhosp  <- bstate[order (bstate[d1[2]], bstate$"Hospital.Name", na.last = NA),] # orders the outcome and removes NAs
+       
         
-        
+            
         bhosp$rank <- 1:nrow(bhosp)
         rtn <- subset(bhosp, rank == d1[3])
-        #rt <- bhosp[1,2]
-        return(rtn)
-        #return(rt)
+        rt <- c(rtn[2])
+        names(rt) <- c(NULL)
+        return(rtn[,2])
+       
+        
                           
 
 
