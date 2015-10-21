@@ -3,7 +3,7 @@
 rankhospital <- function(state, outcome, num = "best") { #create function
         
 d1 <- as.vector(c(state, outcome, num)) # creates vector data from inputs
-
+msg <- c(NA)
         
 r <- data.frame() #establish dataframes for future use
 rc <- data.frame()
@@ -45,7 +45,7 @@ rslt <- rc[,4:6]
         if(t == "FALSE") {stop("invalid state")}
         t <- d1[2] %in% rcn
         if(t == "FALSE") {stop("invalid outcome")}
-        if ((num > nrow(bhosp)) & (!(num == "worst")) & (!(num == "best"))) {stop("NA")}
+        if ((num > nrow(bhosp)) & (!(num == "worst")) & (!(num == "best"))) return(msg) else
         
         if (num == "best") {d1[3] <- 1} 
         if (num == "worst") {d1[3] <- nrow(bhosp)}
@@ -70,7 +70,7 @@ rslt <- rc[,4:6]
                           
 
 
-}      
+}   
       
 
 
