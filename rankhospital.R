@@ -45,10 +45,9 @@ rslt <- rc[,4:6]
         if(t == "FALSE") {stop("invalid state")}
         t <- d1[2] %in% rcn
         if(t == "FALSE") {stop("invalid outcome")}
-        if ((num > nrow(bhosp)) & (!(num == "worst")) & (!(num == "best"))) return(msg) else
+        if ((num > nrow(bhosp)) & (num != "worst") & (num != "best")) return(msg) else
         
-        if (num == "best") {d1[3] <- 1} 
-        if (num == "worst") {d1[3] <- nrow(bhosp)}
+        
         
         
 
@@ -58,9 +57,10 @@ rslt <- rc[,4:6]
         
         bhosp  <- bstate[order (bstate[d1[2]], bstate$"Hospital.Name", na.last = NA),] # orders the outcome and removes NAs
        
-        
+        if (num == "best") {d1[3] <- 1} # define "best" and "worst
+        if (num == "worst") {d1[3] <- nrow(bhosp)}
             
-        bhosp$rank <- 1:nrow(bhosp)
+        bhosp$rank <- 1:nrow(bhosp) # groom output
         rtn <- subset(bhosp, rank == d1[3])
         rt <- c(rtn[2])
         names(rt) <- c(NULL)
